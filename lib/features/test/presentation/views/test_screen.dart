@@ -32,7 +32,7 @@ class TestScreen extends StatelessWidget {
       { String? id }
       ) async {
     final url = Uri.parse(
-      'https://script.google.com/macros/s/AKfycbxNlxsPOE5d3JYkshzivaDvWq-9a4c8yJGntcHy205lXBWECuaWiDC7xYL5BMz6FEjd/exec',
+      'https://script.google.com/macros/s/AKfycbxgjtpaeqeJwOfRzyKKrNFMjBvHtRECtLYyFIKxUtH4Pt6qOl-BWlTG5OGzvY0f7TAKHw/exec',
     );
 
     String? extractAnswer(String key) {
@@ -75,11 +75,20 @@ class TestScreen extends StatelessWidget {
       return '';
     })();
 
+
     // Stage 4 - Q0: AI Assistant
     final usedAIAssistant = (() {
       final index = userAnswers['3_0']; // stageFourQuestions[0]
       if (index is int && index >= 0 && index < stageFourQuestions[0].answers.length) {
         return stageFourQuestions[0].answers[index];
+      }
+      return '';
+    })();
+
+    final aiAssistantUsageFrequency = (() {
+      final index = userAnswers['3_1']; // stage 3 (index starts from 0), question 1
+      if (index is int && index >= 0 && index < stageFourQuestions[1].answers.length) {
+        return stageFourQuestions[1].answers[index];
       }
       return '';
     })();
@@ -101,6 +110,7 @@ class TestScreen extends StatelessWidget {
           'courseCount': courseCount,
           'usedFirstAidApp': usedFirstAidApp,
           'usedAIAssistant': usedAIAssistant,
+          'aiAssistantUsageFrequency': aiAssistantUsageFrequency,
         }),
       );
 
