@@ -2,6 +2,7 @@ import 'package:safty_children/features/test/models/question_model.dart';
 
 final List<QuestionModel> stageThreeQuestions = [
   QuestionModel(
+
     question: '1- هل سبق لك استخدام تطبيق الإسعافات الأولية في الممارسة العملية؟',
     answers: [
       'نعم',
@@ -10,9 +11,11 @@ final List<QuestionModel> stageThreeQuestions = [
     correctAnswer: [],
     isMultiChoice: false,
     type: QuestionType.withPoints,
+      stage: 3
   ),
 
   QuestionModel(
+
     question: '2- أهمية تطبيق الموبايل للإسعافات الأولية للممرضين؟',
     answers: [
       'خدمة الوصول السريع للمستشفيات',
@@ -24,9 +27,11 @@ final List<QuestionModel> stageThreeQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 3
   ),
 
   QuestionModel(
+
     question: '3-  استخدامات تطبيق الموبايل للإسعافات الأولية للممرضين؟',
     answers: [
       'الوصول إلى الإرشادات المتعلقة بحالة الطفل',
@@ -38,9 +43,11 @@ final List<QuestionModel> stageThreeQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 3
   ),
 
   QuestionModel(
+
     question: '4- المخاطر المحتملة من استخدام تطبيق الموبايل للإسعافات الأولية؟',
     answers: [
       'ارتفاع مستوى الأداء المهاري للفريق الطبي',
@@ -52,5 +59,6 @@ final List<QuestionModel> stageThreeQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 3
   ),
 ];

@@ -140,7 +140,6 @@ class TestScreen extends StatelessWidget {
           if (state is TestCompleteState) {
             final cubit = context.read<TestCubit>();
             final nameController = TextEditingController();
-            final idController = TextEditingController();
 
             showDialog(
               context: context,
@@ -161,9 +160,9 @@ class TestScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () async {
                         final name = nameController.text.trim();
-                        final id = idController.text.trim();
                         final score = cubit.correctAnswerCount().round();
                         final total = cubit.totalPoints().round();
+                        final currentUserAnswers = Map<String, dynamic>.from(cubit.userAnswers);
 
                         if (name.isEmpty ) {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -181,7 +180,7 @@ class TestScreen extends StatelessWidget {
                           name,
                           score,
                           total,
-                          cubit.userAnswers,
+                          currentUserAnswers,
                           stageOneIntro, // ✅ pass the question list!
                         );
 
@@ -191,7 +190,9 @@ class TestScreen extends StatelessWidget {
                           builder: (_) => CustomDialog(
                             correctAnswersCount: score.toDouble(),
                             totalQuestions: total.toDouble(),
+                            userAnswers: cubit.userAnswers, // Use the same snapshot
                           ),
+
                         );
                       },
                       child: const Text("إرسال"),
@@ -210,25 +211,49 @@ class TestScreen extends StatelessWidget {
               bool hasStarted = cubit.userAnswers.isNotEmpty;
 
               return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MainButton(
-                      title: "بدء الاختبار",
-                      onPressed: () {
-                        cubit.startTest(reset: true);
-                      },
-                    ),
-                    if (hasStarted) ...[
-                      SizedBox(height: 20.h),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "استمارة إستبيان للممرضين عن تأثير الذكاء الإصطناعي مساعد الطيار المدمج مع تطبيق الموبايل على أداء الممرضين الجدد تجاه الإسعافات الأولية للأطفال",
+                        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green),
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.green.withOpacity(0.05),
+                        ),
+                        child: Text(
+                          "عزيزتي / عزيزي الممرض / الممرضة، هذه المعلومات سرية لغرض البحث والدراسة، ولك الحق في المشاركة أو الإنسحاب في أي وقت.\n\nملاحظة: بعض الأسئلة لها أكثر من إجابة.",
+                          style: TextStyle(fontSize: 14.sp),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
                       MainButton(
-                        title: "إكمال الامتحان",
+                        title: "بدء الاختبار",
                         onPressed: () {
-                          cubit.startTest(reset: false);
+                          cubit.startTest(reset: true);
                         },
                       ),
+                      if (hasStarted) ...[
+                        SizedBox(height: 20.h),
+                        MainButton(
+                          title: "إكمال الامتحان",
+                          onPressed: () {
+                            cubit.startTest(reset: false);
+                          },
+                        ),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
               );
             } else if (state is NextQuestionState || state is ChoiceAnswerState) {
@@ -236,7 +261,18 @@ class TestScreen extends StatelessWidget {
               if (currentIndex >= cubit.questions.length) {
                 return const Center(child: Text('لا يوجد سؤال حالياً'));
               }
-
+              String getStageName(int stageIndex) {
+                switch (stageIndex) {
+                  case 1:
+                    return "الخصائص الشخصية للممرضين:";
+                  case 2:
+                    return "معلومات الممرضين عن الإسعافات الأولية:";
+                  case 3:
+                    return ": معلومات الممرضين عن تطبيق الموبايل للإسعافات الأولية:";
+                  default:
+                    return "معلومات الممرضين فيما يتعلق بتطبيق مساعد الطيار:";
+                }
+              }
               final currentQuestion = cubit.questions[currentIndex];
               final userAnswer = cubit.userAnswers["${cubit.currentStageIndex}_$currentIndex"];
 
@@ -248,7 +284,7 @@ class TestScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "المرحلة ${cubit.currentStageIndex + 1}",
+                        "  ${cubit.currentStageIndex + 1}  ${getStageName(cubit.currentStageIndex + 1)}",
                         style: AppStyles.headStyle.copyWith(fontSize: 20.sp, fontWeight: FontWeight.bold),
                       ),
                       Text(

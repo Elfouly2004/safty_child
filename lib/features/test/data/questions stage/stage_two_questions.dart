@@ -2,6 +2,7 @@ import 'package:safty_children/features/test/models/question_model.dart';
 
 List<QuestionModel> stageTwoQuestions = [
   QuestionModel(
+
     question: '1- ما مفهوم الإسعافات الأولية؟',
     answers: [
       'الرعاية الفورية المقدمة للطفل المصاب قبل وصول المساعدة الطبية المتخصصة.',
@@ -13,9 +14,11 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
+
     question: '2- ما هو الهدف الرئيسي من الإسعافات الأولية؟',
     answers: [
       'رعاية تستخدم لتشخيص الأمراض وعلاجها',
@@ -27,6 +30,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -41,6 +45,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -55,6 +60,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -69,6 +75,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -83,6 +90,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -97,6 +105,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -111,6 +120,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -125,6 +135,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -139,6 +150,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -153,6 +165,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -167,6 +180,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -181,6 +195,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -195,6 +210,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -209,6 +225,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -223,6 +240,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -237,6 +255,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -251,6 +270,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -265,6 +285,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -279,6 +300,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -293,6 +315,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -307,6 +330,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -321,6 +345,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -335,6 +360,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -349,6 +375,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -363,6 +390,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -377,6 +405,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -391,6 +420,7 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 
   QuestionModel(
@@ -405,5 +435,6 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 2
   ),
 ];

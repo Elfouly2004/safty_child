@@ -2,20 +2,24 @@ import 'package:safty_children/features/test/models/question_model.dart';
 
 final List<QuestionModel> stageFourQuestions = [
   QuestionModel(
+
     question:
     '1- هل سبق لك استخدام الذكاء الاصطناعي مساعد الطيار في الممارسة العملية؟',
     answers: ['نعم', 'لا'],
     correctAnswer: [],
     isMultiChoice: false,
     type: QuestionType.withPoints,
+      stage: 4
   ),
   QuestionModel(
+
     question:
     '2- إذا كانت الإجابة "نعم"، فكم مرة تم إستخدام تطبيق الذكاء الاصطناعي مساعد الطيار لتعلم إجراءات أو إرشادات تمريضية جديدة؟',
     answers: ['يومياً', 'أسبوعياً', 'أحياناً', 'أبداً'],
     correctAnswer: [],
     isMultiChoice: false,
     type: QuestionType.withPoints,
+    stage: 4
   ),
 
   QuestionModel(
@@ -31,6 +35,7 @@ final List<QuestionModel> stageFourQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 4
   ),
 
   QuestionModel(
@@ -45,6 +50,7 @@ final List<QuestionModel> stageFourQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 4
   ),
 
   QuestionModel(
@@ -60,6 +66,7 @@ final List<QuestionModel> stageFourQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 4
   ),
 
   QuestionModel(
@@ -75,6 +82,7 @@ final List<QuestionModel> stageFourQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 4
   ),
 
   QuestionModel(
@@ -90,5 +98,6 @@ final List<QuestionModel> stageFourQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+      stage: 4
   ),
 ];
