@@ -4,5 +4,8 @@ class LabeledQuestion {
   final String id;
   final QuestionModel question;
 
-  LabeledQuestion({required this.id, required this.question});
+  LabeledQuestion({
+    required this.id,
+    required this.question,
+  });
 }

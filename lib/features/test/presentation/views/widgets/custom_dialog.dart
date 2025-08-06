@@ -81,24 +81,24 @@ class CustomDialog extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10.w),
-                // Expanded(
-                //   child: MainButton(
-                //     title: 'مراجعة',
-                //     onPressed: () {
-                //       Navigator.pop(context);
-                //       Navigator.pop(context);
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //           builder: (_) => ReviewAnswersScreen(
-                //             userAnswers: userAnswers,
-                //             allQuestions: getAllLabeledQuestions(), // دي الدالة اللي ترجع الأسئلة كلها مع الـ id
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                // ),
+                Expanded(
+                  child: MainButton(
+                    title: 'مراجعة',
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ReviewAnswersScreen(
+                            userAnswers: userAnswers,
+                            allQuestions: getAllLabeledQuestions().map((q) => q.question).toList(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 20.h),

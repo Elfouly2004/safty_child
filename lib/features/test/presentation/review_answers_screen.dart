@@ -1,105 +1,98 @@
 import 'package:flutter/material.dart';
-import '../models/labeled_question.dart';
+import '../models/question_model.dart';
 
 class ReviewAnswersScreen extends StatelessWidget {
   final Map<String, dynamic> userAnswers;
-  final List<LabeledQuestion> allQuestions;
+  final List<QuestionModel> allQuestions;
 
   const ReviewAnswersScreen({
-    super.key,
+    Key? key,
     required this.userAnswers,
     required this.allQuestions,
-  });
-
-  List<int> ensureList(dynamic value) {
-    if (value is List) {
-      return value.cast<int>();
-    } else if (value is int) {
-      return [value];
-    } else {
-      return [];
-    }
-  }
-
-  String formatAnswerList(dynamic indices, List<String> options) {
-    final List<int> indexList = ensureList(indices);
-    return indexList.map((i) {
-      if (i >= 0 && i < options.length) {
-        return options[i];
-      }
-      return "غير معروف";
-    }).join("، ");
-  }
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<LabeledQuestion> wrongQuestions = allQuestions.where((labeled) {
-      final userAnswer = userAnswers[labeled.id];
-      final correctAnswer = labeled.question.correctAnswer;
+    final List<_QuestionWithIndex> incorrectQuestions = [];
 
-      debugPrint("🔍 ${labeled.id}: ${labeled.question.question}");
-      debugPrint("   ✅ Correct: $correctAnswer");
-      debugPrint("   🟥 User: $userAnswer");
+    userAnswers.forEach((key, answer) {
+      if (key.startsWith('0_')) return; // تجاهل الأسئلة التعريفية
 
-      if (userAnswer == null) return true;
+      final parts = key.split('_');
+      if (parts.length != 2) return;
 
-      final userList = Set.from(ensureList(userAnswer));
-      final correctList = Set.from(ensureList(correctAnswer));
+      final questionIndex = int.tryParse(parts[1]);
+      if (questionIndex == null || questionIndex >= allQuestions.length) return;
 
-      final isCorrect = userList.length == correctList.length &&
-          userList.containsAll(correctList);
+      final question = allQuestions[questionIndex];
 
-      debugPrint("   🎯 IsCorrect: $isCorrect");
-
-      return !isCorrect;
-    }).toList();
+      if (!_answersMatch(answer, question.correctAnswer)) {
+        incorrectQuestions.add(_QuestionWithIndex(key, question, answer));
+      }
+    });
 
     return Scaffold(
-      appBar: AppBar(title: const Text('مراجعة إجاباتك')),
-      body: wrongQuestions.isEmpty
-          ? const Center(child: Text("كل إجاباتك صحيحة، أحسنت! 🎉"))
-          : CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                final labeled = wrongQuestions[index];
-                final question = labeled.question;
-                final userAnswer = userAnswers[labeled.id];
-                final userList = ensureList(userAnswer);
-                final correctList = ensureList(question.correctAnswer);
+      appBar: AppBar(title: Text('مراجعة الأخطاء')),
+      body: incorrectQuestions.isEmpty
+          ? Center(child: Text('كل إجاباتك صحيحة!'))
+          : ListView.builder(
+        itemCount: incorrectQuestions.length,
+        itemBuilder: (context, index) {
+          final item = incorrectQuestions[index];
+          return Card(
+            margin: EdgeInsets.all(12),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('السؤال:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(item.question.question),
 
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${index + 1}. ${question.question}',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'إجابتك: ${formatAnswerList(userList, question.answers)}',
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                        Text(
-                          'الإجابة الصحيحة: ${formatAnswerList(correctList, question.answers)}',
-                          style: const TextStyle(color: Colors.green),
-                        ),
-                      ],
-                    ),
+                  SizedBox(height: 10),
+                  Text('إجابتك:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    _formatAnswer(item.userAnswer, item.question),
+                    style: TextStyle(color: Colors.red),
                   ),
-                );
-              },
-              childCount: wrongQuestions.length,
+
+                  SizedBox(height: 10),
+                  Text('الإجابة الصحيحة:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    _formatAnswer(item.question.correctAnswer, item.question),
+                    style: TextStyle(color: Colors.green),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
+
+  bool _answersMatch(dynamic a, dynamic b) {
+    if (a is List && b is List) {
+      return a.length == b.length && a.toSet().containsAll(b);
+    }
+    return a.toString() == b.toString();
+  }
+
+  String _formatAnswer(dynamic answer, QuestionModel question) {
+    if (answer is List) {
+      return answer.map((i) => question.answers[i]).join(', ');
+    } else if (answer is int) {
+      return question.answers[answer];
+    } else {
+      return answer.toString();
+    }
+  }
+}
+
+class _QuestionWithIndex {
+  final String id;
+  final QuestionModel question;
+  final dynamic userAnswer;
+
+  _QuestionWithIndex(this.id, this.question, this.userAnswer);
 }
