@@ -186,15 +186,15 @@ List<QuestionModel> stageTwoQuestions = [
   QuestionModel(
     question: '14- ما هي “حبوب الغلة” ولماذا تُعتبر شديدة الخطورة؟',
     answers: [
-      'مبيد حشري يستخدم في تخزين الغلال ويتحول في المعدة إلى غاز فوسفيد الهيدروجين القاتل',
+      'مبيد حشري يستخدم في تخزين الغلال',
+      ' تتحول في المعدة إلى غاز فوسفيد الهيدروجين السام',
       'دواء لعلاج أمراض المعدة',
-      'مكمل غذائي غني بالبروتين',
-      'مادة كيميائية غير ضارة'
+      ' مكمل غذائي غني بالبروتين'
     ],
-    correctAnswer: [0],
-    isMultiChoice: false,
+    correctAnswer: [0,1],
+    isMultiChoice: true,
     type: QuestionType.withPoints,
-    point: 1.0,
+    point: 2.0,
   ),
 
   QuestionModel(
@@ -242,15 +242,15 @@ List<QuestionModel> stageTwoQuestions = [
   QuestionModel(
     question: '18- ما الأعراض الشائعة لتسمم الاستنشاق عند الأطفال؟',
     answers: [
-      'تدهور في مستوى الوعي أو غيبوبة، زرقة في الشفاه أو الأطراف، الدوار وصعوبة في التنفس',
-      'صداع مفاجئ وضعف عام',
+      'صداع مفاجئ وضعف عام تدهور في مستوى الوعي أو غيبوبة',
+      'دوار وصعوبة في التنفس و زرقة في الشفاه أو الأطراف',
       'طفح جلدي خفيف فقط',
       'زيادة النشاط الحركي فقط'
     ],
-    correctAnswer: [0],
-    isMultiChoice: false,
+    correctAnswer: [0,1],
+    isMultiChoice: true,
     type: QuestionType.withPoints,
-    point: 1.0,
+    point: 2.0,
   ),
 
   QuestionModel(
@@ -380,17 +380,17 @@ List<QuestionModel> stageTwoQuestions = [
   ),
 
   QuestionModel(
-    question: '28- ما هي الإجراءات التمريضية الفورية عند اختناق الأطفال في حالة فقدان الوعي؟',
+    question: '28- الإجراءات التمريضي الفوري عند اختناق الأطفال في حالة عدم فقدان الوعي ؟',
     answers: [
-      'إعطاء خمسة ضربات على الظهر',
-      'تشجيع الطفل على الكحة بقوة',
-      'إعطاء خمس ضغطات بطنية',
-      'إعطاء ضربات على الظهر'
+      'إعطاء ثلاثة ضربات علي الظهر ',
+      'تشجيع الطفل علي الكحة بقوة ',
+      'إعطاء خمسة ضربات علي الظهر',
+      'إعطاء ثلاثة ضغات بطنية'
     ],
-    correctAnswer: [2],
-    isMultiChoice: false,
+    correctAnswer: [2,3],
+    isMultiChoice: true,
     type: QuestionType.withPoints,
-    point: 1.0,
+    point: 2.0,
   ),
 
   QuestionModel(
