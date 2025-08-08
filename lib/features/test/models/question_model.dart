@@ -7,7 +7,7 @@ class QuestionModel {
   final List<int> correctAnswer;
   final bool isMultiChoice;
   final QuestionType type;
-  final int stage; // ✅ جديد
+  final int stage;
   final bool Function(Map<String, dynamic> previousAnswers)? visibilityCondition;
 
   QuestionModel({
@@ -17,7 +17,7 @@ class QuestionModel {
     required this.correctAnswer,
     required this.isMultiChoice,
     required this.type,
-    required this.stage, // ✅ جديد
+    required this.stage,
     this.visibilityCondition,
   });
 }
