@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safty_children/core/helpers/spacer.dart';
@@ -6,14 +5,19 @@ import 'package:safty_children/core/themeing/app_colors.dart';
 import 'package:safty_children/core/themeing/app_styles.dart';
 import 'package:safty_children/features/test/presentation/views/widgets/main_button.dart';
 
+import '../../../data/questions_repository.dart';
+import '../../review_answers_screen.dart';
+
 class CustomDialog extends StatelessWidget {
   final double correctAnswersCount;
   final double totalQuestions;
+  final Map<String, dynamic> userAnswers;
 
   const CustomDialog({
     super.key,
     required this.correctAnswersCount,
     required this.totalQuestions,
+    required this.userAnswers,
   });
 
   @override
@@ -23,6 +27,7 @@ class CustomDialog extends StatelessWidget {
       child: Container(
         width: 300.w,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20).r),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -62,17 +67,41 @@ class CustomDialog extends StatelessWidget {
                 fontSize: 18.sp,
               ),
             ),
-            verticalSpace(50),
-            MainButton(
-              title: 'اغلاق',
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-                // أو لو عايز ترجّع للصفحة الرئيسية تستخدم:
-                // context.pushAndRemoveUntil(Routes.home, predicate: (_) => false);
-              },
+            verticalSpace(40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: MainButton(
+                    title: 'اغلاق',
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                SizedBox(width: 10.w),
+                Expanded(
+                  child: MainButton(
+                    title: 'مراجعة.',
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ReviewAnswersScreen(
+                            userAnswers: userAnswers,
+                            allQuestions: getAllLabeledQuestions().map((q) => q.question).toList(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 20.h),
           ],
         ),
       ),
