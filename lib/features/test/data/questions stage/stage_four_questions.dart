@@ -3,6 +3,7 @@ import 'package:safty_children/features/test/models/question_model.dart';
 final List<QuestionModel> stageFourQuestions = [
   QuestionModel(
 
+
     question:
     '1- هل سبق لك استخدام الذكاء الاصطناعي مساعد الطيار في الممارسة العملية؟',
     answers: ['نعم', 'لا'],
@@ -55,7 +56,9 @@ final List<QuestionModel> stageFourQuestions = [
 
   QuestionModel(
     question:
+
     '5- ما هي عيوب استخدام الذكاء الاصطناعي مساعد الطيار في الممارسة التمريضية؟',
+
     answers: [
       'عدم تقييم حالة الطفل الفعلية',
       'تعزيز دعم اتخاذ القرار المتعلق بحالة الطفل',
@@ -71,6 +74,7 @@ final List<QuestionModel> stageFourQuestions = [
 
   QuestionModel(
     question:
+
     '6- ما هي التحديات التي تواجه استخدام الذكاء الاصطناعي مساعد الطيار في الممارسة التمريضية؟',
     answers: [
       'نقص التدريب والدعم الفني',

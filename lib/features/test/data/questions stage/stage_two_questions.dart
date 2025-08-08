@@ -210,7 +210,9 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+
       stage: 2
+
   ),
 
   QuestionModel(
@@ -270,7 +272,9 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+
       stage: 2
+
   ),
 
   QuestionModel(
@@ -420,7 +424,9 @@ List<QuestionModel> stageTwoQuestions = [
     isMultiChoice: true,
     type: QuestionType.withPoints,
     point: 2.0,
+
       stage: 2
+
   ),
 
   QuestionModel(

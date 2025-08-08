@@ -11,15 +11,13 @@ class LoopingVideoWidget extends StatefulWidget {
 
 class _LoopingVideoWidgetState extends State<LoopingVideoWidget> {
   late VideoPlayerController _controller;
+  bool _isPlaying = false;
 
   @override
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset(widget.videoAssetPath)
       ..initialize().then((_) {
-        _controller.setLooping(true);
-        _controller.setVolume(0);
-        _controller.play();
         setState(() {});
       });
   }
@@ -27,18 +25,33 @@ class _LoopingVideoWidgetState extends State<LoopingVideoWidget> {
   @override
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
-        ? AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: VideoPlayer(_controller),
+        ? GestureDetector(
+      onTap: () {
+        setState(() {
+          _isPlaying ? _controller.pause() : _controller.play();
+          _isPlaying = !_isPlaying;
+        });
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: VideoPlayer(_controller),
+            ),
+          ),
+          if (!_isPlaying)
+            const Icon(Icons.play_circle_fill,
+                size: 64, color: Colors.white),
+        ],
       ),
     )
         : const SizedBox(
       height: 200,
       child: Center(child: CircularProgressIndicator()),
     );
-
   }
 
   @override
@@ -47,3 +60,4 @@ class _LoopingVideoWidgetState extends State<LoopingVideoWidget> {
     super.dispose();
   }
 }
+

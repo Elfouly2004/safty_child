@@ -77,8 +77,8 @@ final List<PracticeModel> chokingPractice = [
       ),
 
 
-      PracticeVideoPath(videoPath: 'assets/vids/5aa.mp4'),
-      PracticeVideoPath(videoPath: 'assets/vids/6aa.mp4'),
+      PracticeVideoPath(videoPath: 'assets/vids/new1.mp4'),
+      PracticeVideoPath(videoPath: 'assets/vids/new42.mp4'),
 
 
 
@@ -112,9 +112,9 @@ final List<PracticeModel> chokingPractice = [
       ),
 
 
-      PracticeVideoPath(videoPath: 'assets/vids/3a.mp4'),
+      PracticeVideoPath(videoPath: 'assets/vids/66.mp4'),
 
-      PracticeVideoPath(videoPath: 'assets/vids/4a.mp4'),
+      PracticeVideoPath(videoPath: 'assets/vids/666.mp4'),
 
       PracticeText(
         subTitle:

@@ -141,6 +141,8 @@ class TestScreen extends StatelessWidget {
             final cubit = context.read<TestCubit>();
             final nameController = TextEditingController();
 
+
+
             showDialog(
               context: context,
               barrierDismissible: false,
@@ -160,6 +162,7 @@ class TestScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () async {
                         final name = nameController.text.trim();
+
                         final score = cubit.correctAnswerCount().round();
                         final total = cubit.totalPoints().round();
                         final currentUserAnswers = Map<String, dynamic>.from(cubit.userAnswers);
@@ -180,7 +183,9 @@ class TestScreen extends StatelessWidget {
                           name,
                           score,
                           total,
+
                           currentUserAnswers,
+
                           stageOneIntro, // ✅ pass the question list!
                         );
 
@@ -190,8 +195,10 @@ class TestScreen extends StatelessWidget {
                           builder: (_) => CustomDialog(
                             correctAnswersCount: score.toDouble(),
                             totalQuestions: total.toDouble(),
+
                             userAnswers: cubit.userAnswers, // Use the same snapshot
                           ),
+
 
                         );
                       },

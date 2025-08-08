@@ -11,7 +11,9 @@ final List<QuestionModel> stageThreeQuestions = [
     correctAnswer: [],
     isMultiChoice: false,
     type: QuestionType.withPoints,
+
       stage: 3
+
   ),
 
   QuestionModel(
