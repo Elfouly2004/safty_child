@@ -6,10 +6,10 @@ class ReviewAnswersScreen extends StatelessWidget {
   final List<QuestionModel> allQuestions;
 
   const ReviewAnswersScreen({
-    Key? key,
+    super.key,
     required this.userAnswers,
     required this.allQuestions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
