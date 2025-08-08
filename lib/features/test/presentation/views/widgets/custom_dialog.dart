@@ -83,7 +83,7 @@ class CustomDialog extends StatelessWidget {
                 SizedBox(width: 10.w),
                 Expanded(
                   child: MainButton(
-                    title: 'مراجعة',
+                    title: 'مراجعة.',
                     onPressed: () {
                       Navigator.pop(context);
                       Navigator.pop(context);
