@@ -36,7 +36,7 @@ final List<QuestionModel> stageOneIntro = [
   QuestionModel(
 
     question: '4- الحالة الاجتماعية:',
-    answers: ['أعزب/ عزباء', 'متزوج/ متزوجة', 'مطلق/ مطلقة', 'أرمل/ أرملة'],
+    answers: ['.أعزب/ عزباء', 'متزوج/ متزوجة', 'مطلق/ مطلقة', 'أرمل/ أرملة'],
     correctAnswer: [],
     isMultiChoice: false,
     type: QuestionType.withoutPoints,
