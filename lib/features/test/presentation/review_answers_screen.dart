@@ -16,7 +16,7 @@ class ReviewAnswersScreen extends StatelessWidget {
     final List<_QuestionWithIndex> incorrectQuestions = [];
 
     userAnswers.forEach((key, answer) {
-      if (key.startsWith('0_')) return; // تجاهل الأسئلة التعريفية
+      if (key.startsWith('0_')) return;
 
       final parts = key.split('_');
       if (parts.length != 2) return;
