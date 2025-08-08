@@ -5,7 +5,8 @@ class LabeledQuestion {
   final QuestionModel question;
 
   LabeledQuestion({
-    required this.id,
+
     required this.question,
+    required this.id,
   });
 }
