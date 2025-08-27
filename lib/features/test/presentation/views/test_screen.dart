@@ -16,6 +16,7 @@ import 'package:safty_children/features/test/presentation/views/widgets/custom_d
 import 'package:safty_children/features/test/presentation/views/widgets/main_button.dart';
 import 'package:safty_children/features/test/presentation/views/widgets/no_answer_dialog.dart';
 
+import '../../data/questions stage/stage_five_questions.dart';
 import '../../data/questions stage/stage_four_questions.dart';
 import '../../data/questions stage/stage_one_intro.dart';
 import '../../data/questions stage/stage_thee_questions.dart';
@@ -32,7 +33,7 @@ class TestScreen extends StatelessWidget {
       { String? id }
       ) async {
     final url = Uri.parse(
-      'https://script.google.com/macros/s/AKfycbxgjtpaeqeJwOfRzyKKrNFMjBvHtRECtLYyFIKxUtH4Pt6qOl-BWlTG5OGzvY0f7TAKHw/exec',
+      'https://script.google.com/macros/s/AKfycbyrSKhNauEp3-l-sq8t3sCTFTSvjimASNiEFtz0Ih0wIo_UMMJPP2v56AxrLENtVD37bQ/exec',
     );
 
     String? extractAnswer(String key) {
@@ -124,6 +125,68 @@ class TestScreen extends StatelessWidget {
     }
   }
 
+  Future<void> sendStageFiveToSheet2({
+    required String id,
+    required Map<String, dynamic> userAnswers,
+    required List<QuestionModel> stageFiveQuestions,
+  }) async {
+    final url = Uri.parse(
+      'https://script.google.com/macros/s/AKfycbyrSKhNauEp3-l-sq8t3sCTFTSvjimASNiEFtz0Ih0wIo_UMMJPP2v56AxrLENtVD37bQ/exec',
+    );
+
+    String answerTextFor(int qIndex, dynamic stored) {
+      if (stored is int) {
+        final idx = stored;
+        if (idx >= 0 && idx < stageFiveQuestions[qIndex].answers.length) {
+          return stageFiveQuestions[qIndex].answers[idx];
+        }
+        return '';
+      }
+      if (stored is List) {
+        final picked = <String>[];
+        for (final v in stored) {
+          if (v is int &&
+              v >= 0 &&
+              v < stageFiveQuestions[qIndex].answers.length) {
+            picked.add(stageFiveQuestions[qIndex].answers[v]);
+          }
+        }
+        return picked.join(' | ');
+      }
+      return stored?.toString() ?? '';
+    }
+
+    final answersPayload = <Map<String, String>>[];
+    for (int i = 0; i < stageFiveQuestions.length; i++) {
+      final ans = answerTextFor(i, userAnswers['STAGE5_$i']);
+      answersPayload.add({'q': stageFiveQuestions[i].question, 'a': ans});
+    }
+
+    final body = {
+      'action': 'submit_stage5',
+      'sheet': 'Sheet2',
+      'id': id,
+      'answers': answersPayload,
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
+      if (response.statusCode != 200) {
+        debugPrint(
+            '❌ Stage5 submit failed: ${response.statusCode} - ${response
+                .body}');
+      } else {
+        debugPrint('✅ Stage5 submitted');
+      }
+    } catch (e) {
+      debugPrint('❌ Error sending Stage5: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,8 +240,17 @@ class TestScreen extends StatelessWidget {
                         Navigator.pop(context); // Close dialog
 
                         // ✅ Add debug print here to log all collected answers
+                        final lastIndex = cubit.allStageQuestions.length - 1;
                         debugPrint("📤 Sending userAnswers: ${cubit.userAnswers}");
-
+                        final Map<String, dynamic> stage5Only = {};
+                        for (int i = 0; i < stageFiveQuestions.length; i++) {
+                          final key = '${lastIndex}_$i';
+                          if (currentUserAnswers.containsKey(key)) {
+                            stage5Only['STAGE5_$i'] = currentUserAnswers[key];
+                          } else {
+                            stage5Only['STAGE5_$i'] = '';
+                          }
+                        }
                         await sendResultToGoogleSheet(
                           name,
                           score,
@@ -188,7 +260,11 @@ class TestScreen extends StatelessWidget {
 
                           stageOneIntro, // ✅ pass the question list!
                         );
-
+                        await sendStageFiveToSheet2(
+                          id: name,
+                          userAnswers: stage5Only,
+                          stageFiveQuestions: stageFiveQuestions,
+                        );
                         showDialog(
                           context: context,
                           barrierDismissible: false,
@@ -276,8 +352,10 @@ class TestScreen extends StatelessWidget {
                     return "معلومات الممرضين عن الإسعافات الأولية:";
                   case 3:
                     return ": معلومات الممرضين عن تطبيق الموبايل للإسعافات الأولية:";
-                  default:
+                  case 4:
                     return "معلومات الممرضين فيما يتعلق بتطبيق مساعد الطيار:";
+                  default:
+                    return "تقييم مستوى رضا الممرضين الجدد فيما يتعلق بتطبيق الإسعافات الأولية و فيما يتعلق بتطبيق الذكاء الاصطناعي مساعد الطيار:";
                 }
               }
               final currentQuestion = cubit.questions[currentIndex];

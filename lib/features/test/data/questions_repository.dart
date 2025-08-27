@@ -1,3 +1,4 @@
+import 'package:safty_children/features/test/data/questions%20stage/stage_five_questions.dart';
 import 'package:safty_children/features/test/data/questions%20stage/stage_four_questions.dart';
 import 'package:safty_children/features/test/data/questions%20stage/stage_thee_questions.dart';
 import 'package:safty_children/features/test/data/questions%20stage/stage_two_questions.dart';
@@ -13,6 +14,7 @@ List<LabeledQuestion> getAllLabeledQuestions() {
     stageTwoQuestions,   // stageIndex = 0
     stageThreeQuestions, // stageIndex = 1
     stageFourQuestions,  // stageIndex = 2
+    stageFiveQuestions,  // stageIndex = 3
   ];
 
   for (int stageIndex = 0; stageIndex < stages.length; stageIndex++) {

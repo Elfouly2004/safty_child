@@ -5,6 +5,7 @@ import 'package:safty_children/features/home/presentation/views/home_screen.dart
 import 'package:safty_children/features/home/presentation/views/web_view_screen.dart';
 import 'package:safty_children/features/media/presentation/views/media_screen.dart';
 import 'package:safty_children/features/test/bloc/cubit/test_cubit.dart';
+import 'package:safty_children/features/test/data/questions%20stage/stage_five_questions.dart';
 import 'package:safty_children/features/test/data/questions%20stage/stage_four_questions.dart';
 import 'package:safty_children/features/test/data/questions%20stage/stage_one_intro.dart';
 import 'package:safty_children/features/test/data/questions%20stage/stage_thee_questions.dart';
@@ -42,7 +43,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
-                create: (context) => TestCubit([stageOneIntro, stageTwoQuestions,stageThreeQuestions,stageFourQuestions]),
+                create: (context) => TestCubit([stageOneIntro, stageTwoQuestions,stageThreeQuestions,stageFourQuestions,stageFiveQuestions]),
                 child: TestScreen(),
               ),
         );
